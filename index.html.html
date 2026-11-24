@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sky Sanctuary Metaverse - Đảo Bay Huyền Ảo</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Three.js r128 & PointerLockControls -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/PointerLockControls.js"></script>
+</head>
+<body>
+  <!-- 3D Canvas Container -->
+  <div id="canvas-container"></div>
+
+  <!-- Reticle / Crosshair -->
+  <div id="crosshair"></div>
+
+  <!-- HUD Overlay -->
+  <div id="hud">
+    <div class="hud-top">
+      <div class="brand">
+        <span class="brand-icon">✨</span>
+        <span class="brand-name">SKY SANCTUARY</span>
+        <span class="badge">Metaverse v1.0</span>
+      </div>
+      <div class="controls-status">
+        <button id="audio-toggle-btn" class="hud-btn" title="Bật/Tắt âm thanh môi trường">
+          🔊 <span id="audio-status-text">Bật Nhạc</span>
+        </button>
+        <button id="help-btn" class="hud-btn" title="Xem hướng dẫn phím">
+          ❓ Trợ giúp
+        </button>
+      </div>
+    </div>
+
+    <!-- Quest Tracker -->
+    <div class="quest-panel">
+      <div class="quest-title">⭐ NHIỆM VỤ THÁM HIỂM</div>
+      <div class="quest-desc" id="quest-text">Thu thập Tinh Thể Ánh Sáng: <strong id="crystal-count">0</strong> / 4</div>
+      <div class="quest-progress-bar">
+        <div id="quest-progress-fill" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <!-- Teleport Notice / Location Banner -->
+    <div id="location-banner">
+      <span id="location-name">Quảng Trường Thánh Điện</span>
+    </div>
+
+    <!-- Interaction Prompt (Press E) -->
+    <div id="interaction-prompt">
+      <span class="key-badge">E</span>
+      <span id="interaction-text">Tương tác</span>
+    </div>
+
+    <!-- Bottom Controls hint -->
+    <div class="hud-bottom">
+      <div class="hint-item"><span class="key">W</span><span class="key">A</span><span class="key">S</span><span class="key">D</span> Di chuyển</div>
+      <div class="hint-item"><span class="key">Space</span> Nhảy</div>
+      <div class="hint-item"><span class="key">Shift</span> Chạy nhanh</div>
+      <div class="hint-item"><span class="key">Chuột</span> Xoay góc nhìn</div>
+    </div>
+  </div>
+
+  <!-- Start / Pause Screen (PointerLock Click blocker) -->
+  <div id="blocker">
+    <div id="instructions">
+      <div class="welcome-box">
+        <div class="island-icon">🏝️</div>
+        <h1>ĐẢO BAY HUYỀN ẢO</h1>
+        <p class="subtitle">Khám phá thế giới ảo 3D trên tầng mây</p>
+        
+        <div class="feature-highlights">
+          <div class="feature-card">
+            <span class="f-icon">🔮</span>
+            <h3>Đại Tinh Thể</h3>
+            <p>Khám phá đảo năng lượng và các tinh thể huyền bí</p>
+          </div>
+          <div class="feature-card">
+            <span class="f-icon">🌀</span>
+            <h3>Cổng Thời Không</h3>
+            <p>Bước vào vòng xoáy để dịch chuyển lên tầng quan sát đỉnh mây</p>
+          </div>
+          <div class="feature-card">
+            <span class="f-icon">🎵</span>
+            <h3>Phiến Đá Âm Nhạc</h3>
+            <p>Bước lên các phiến đá để tạo nên giai điệu ngũ cung du dương</p>
+          </div>
+        </div>
+
+        <button id="start-btn" class="cta-btn">
+          <span>NHẤP ĐỂ BƯỚC VÀO THẾ GIỚI</span>
+          <small>(Nhấn ESC để mở chuột)</small>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lore / Dialog Modal -->
+  <div id="dialog-modal" class="modal-overlay hidden">
+    <div class="modal-content glass-card">
+      <button id="modal-close-btn" class="modal-close">&times;</button>
+      <div class="modal-header">
+        <span class="modal-icon" id="modal-icon">📜</span>
+        <h2 id="modal-title">Bia Ký Cổ Xưa</h2>
+      </div>
+      <div class="modal-body" id="modal-body">
+        Nội dung ghi chép cổ xưa...
+      </div>
+      <div class="modal-footer">
+        <button id="modal-ok-btn" class="btn-primary">Đã hiểu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sound notification toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Game Script -->
+  <script src="main.js"></script>
+</body>
+</html>
